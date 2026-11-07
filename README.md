@@ -12,6 +12,10 @@ disks, BIOS, firewall, SSH or VPN, and it is not a production appliance.
 The [validation report](docs/validation.md) distinguishes automated tests from
 hardware and disaster-recovery tests. [Lire la présentation française](README.fr.md).
 
+The first [Linux integration run](https://github.com/Fogbose/HomeServer/actions/runs/42394077045)
+passed: fresh startup, diagnostics, authenticated WebDAV and restart persistence.
+Backup recovery, private HTTPS and hardware wake-up still need deployment-specific testing.
+
 ## What is included?
 
 - A four-service stack with pinned image versions and digests, persistent named

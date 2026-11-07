@@ -13,6 +13,15 @@
 
 ## GitHub Actions
 
+**First Linux integration run passed on 2026-11-07**, for commit
+`b85c28bf8e3ce1c4ffa3b0cef53e1e19f3906ad1`:
+[validated run](https://github.com/Fogbose/HomeServer/actions/runs/42394077045).
+The run passed Python tests, local links, credential initialization, Compose
+validation, fresh container startup, background-job configuration, diagnostics,
+authenticated WebDAV upload/download and file persistence after an app restart.
+This result applies to that pinned baseline on the hosted Ubuntu runner; it is
+not a deployment or recovery guarantee for another host.
+
 The workflow uses a standard hosted Ubuntu runner with read-only repository
 permissions, no personal server credentials and no uploaded artifacts/cache.
 It runs the tests, validates Compose, starts the pinned stack, checks app/cache
