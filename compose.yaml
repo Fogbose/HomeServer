@@ -1,0 +1,115 @@
+name: homeserver
+
+x-runtime: &runtime
+  restart: unless-stopped
+  stop_grace_period: 120s
+  logging:
+    driver: json-file
+    options:
+      max-size: 10m
+      max-file: '3'
+
+x-nextcloud: &nextcloud
+  <<: *runtime
+  image: nextcloud:34.0.5-apache@sha256:515c072ea1cf82ece3503f301fdf75dd5a7148abcc8fa10aaefd5ec56643b703
+  environment: &environment
+    POSTGRES_HOST: db
+    POSTGRES_DB_FILE: /run/secrets/db_name
+    POSTGRES_USER_FILE: /run/secrets/db_user
+    POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    REDIS_HOST: redis
+    NEXTCLOUD_TRUSTED_DOMAINS: ${NC_TRUSTED_DOMAINS:?Run initialization and review .env}
+    PHP_MEMORY_LIMIT: 512M
+    PHP_UPLOAD_LIMIT: ${PHP_UPLOAD_LIMIT:-2G}
+    TZ: ${TZ:-Etc/UTC}
+  volumes:
+    - html:/var/www/html
+  secrets:
+    - db_name
+    - db_user
+    - db_password
+  networks: [backend, outbound]
+
+services:
+  db:
+    <<: *runtime
+    image: postgres:17.11-bookworm@sha256:839fbb5a4942a7758dd93e18b42ea5649807491a0545b5eeeb8f0b8bb11857a5
+    environment:
+      POSTGRES_DB_FILE: /run/secrets/db_name
+      POSTGRES_USER_FILE: /run/secrets/db_user
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets: [db_name, db_user, db_password]
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks: [backend]
+    shm_size: 128mb
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$(cat /run/secrets/db_user)" -d "$$(cat /run/secrets/db_name)"']
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  redis:
+    <<: *runtime
+    image: redis:8.2.11-bookworm@sha256:99ffb973380cc2f47bca06bd094f7f8c7138a0879a63cb8939896a22b7a65bba
+    command: [redis-server, --save, '', --appendonly, 'no']
+    networks: [backend]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+
+  app:
+    <<: *nextcloud
+    environment:
+      <<: *environment
+      NEXTCLOUD_ADMIN_USER: ${NC_ADMIN_USER:-ncadmin}
+      NEXTCLOUD_ADMIN_PASSWORD_FILE: /run/secrets/admin_password
+    secrets: [db_name, db_user, db_password, admin_password]
+    ports:
+      - '127.0.0.1:${HTTP_PORT:-8080}:80'
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - php
+        - -r
+        - '$$s=json_decode(@file_get_contents("http://127.0.0.1/status.php"),true); exit(!is_array($$s)||empty($$s["installed"])||!empty($$s["maintenance"])||!empty($$s["needsDbUpgrade"]));'
+      interval: 15s
+      timeout: 10s
+      retries: 30
+      start_period: 120s
+
+  cron:
+    <<: *nextcloud
+    init: true
+    stop_signal: SIGTERM
+    entrypoint: /cron.sh
+    depends_on:
+      app:
+        condition: service_healthy
+
+networks:
+  backend:
+    internal: true
+  outbound: {}
+
+volumes:
+  html: {}
+  postgres: {}
+
+secrets:
+  db_name:
+    file: ./secrets/db_name
+  db_user:
+    file: ./secrets/db_user
+  db_password:
+    file: ./secrets/db_password
+  admin_password:
+    file: ./secrets/admin_password

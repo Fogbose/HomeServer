@@ -1,0 +1,25 @@
+name: Bug report
+description: Report a reproducible, sanitized problem in this starter
+body:
+  - type: markdown
+    attributes:
+      value: Do not post secrets or vulnerabilities here. Read SECURITY.md for private reporting.
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and revision
+      description: OS, Python/Docker/Compose versions and commit; no personal hostnames or IPs.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Steps with fictitious values, expected result and actual result.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence
+      description: Relevant errors and checks already attempted. No full configuration dumps.

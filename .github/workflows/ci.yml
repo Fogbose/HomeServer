@@ -1,0 +1,46 @@
+name: Validate starter
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      COMPOSE_PROJECT_NAME: homeserver-ci
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Test helper behavior
+        run: python3 -m unittest discover -s tests -v
+      - name: Validate documentation links
+        run: python3 tests/check_links.py
+      - name: Initialize disposable configuration
+        run: python3 tools/homeserver.py init
+      - name: Validate Compose
+        run: docker compose config -q
+      - name: Start disposable stack
+        run: docker compose up -d --wait --wait-timeout 600
+      - name: Configure background jobs and inspect readiness
+        run: |
+          docker compose exec -T -u www-data app php occ background:cron
+          python3 tools/homeserver.py check
+      - name: Exercise WebDAV and file persistence
+        run: python3 tests/smoke.py
+      - name: Show service state on failure
+        if: failure()
+        run: docker compose ps --all
+      - name: Stop disposable stack
+        if: always()
+        run: docker compose stop
