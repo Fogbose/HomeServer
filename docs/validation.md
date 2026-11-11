@@ -1,5 +1,29 @@
 # Validation coverage
 
+## App Store and client additions — 2026-11-11
+
+- Windows Python: 13 behavior tests passed, including HTTPS-origin rejection,
+  all eleven generated app links, client-guide personalization and refusal to
+  overwrite a client kit. The generator uses only the standard library.
+- Local Markdown links passed. External URLs and heading anchors are not covered
+  by that check.
+- The optional Compose overlay was rendered locally: four services, identical
+  app/cron media image and shared volume, loopback web binding and no database
+  or Redis host ports. No live home-server connection was used.
+- The optional image built successfully in local Docker Desktop (Linux engine).
+  Its smoke test passed a synthetic H.264 encode/probe and ExifTool as UID 33,
+  without network, host mounts or persistent data. CI now runs this in addition
+  to the existing base-stack integration tests; consult Actions for actual status.
+- An originating private deployment reported all eleven apps enabled and media
+  tools ready. This is context, not a reproduced public install/restore test.
+  The public guides use native App Store checks and do not distribute its
+  installation state, backups or personalized clients.
+
+This update does not establish authenticated client synchronization on Android,
+iOS or Thunderbird, app-specific sharing/recurrence behavior, browser video
+playback, a restore drill or an end-to-end installation of all eleven apps in CI.
+Validate those with disposable records before importing real family data.
+
 ## Local preparation — 2026-11-07
 
 - Python 3.12 on Windows: 11 behavior tests passed. They exercise credential

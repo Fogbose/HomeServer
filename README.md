@@ -26,6 +26,8 @@ Backup recovery, private HTTPS and hardware wake-up still need deployment-specif
   or Nextcloud is in maintenance.
 - A local Wake-on-LAN sender with preview by default and explicit source/subnet.
 - Guides for private HTTPS, backups, isolated recovery, updates and safe power management.
+- An optional eleven-app App Store selection, a persistent Memories media image
+  and a credential-free client portal generator for Windows, Android and iOS.
 
 No telemetry, cloud account provisioning, automatic image updates, disk cleanup or
 automatic shutdown is added. Nextcloud extensions are not automatically installed.
@@ -108,12 +110,27 @@ share one physical host: this is **not high availability**. See
 | --- | --- |
 | Understand storage, variables and permissions | [Architecture](docs/architecture.md) |
 | Configure Tailscale HTTPS and family access | [Private access](docs/private-access.md) |
+| Add recipes, expenses, groupware and other App Store apps | [Applications](docs/applications.md) |
+| Add persistent FFmpeg, ffprobe and ExifTool | [Memories](docs/memories.md) |
+| Connect Windows, Android and iOS clients | [Clients](docs/clients.md) |
 | Plan coherent backups and isolated recovery | [Backup and restore](docs/backup-restore.md) |
 | Diagnose and update the stack | [Operations](docs/operations.md) |
 | Understand S3/S5 and local wake-up | [Power and WOL](docs/power.md) |
 | Understand actual validation coverage | [Validation](docs/validation.md) |
 
 ## Development and contribution
+
+Generate a small offline portal with links to all eleven apps and a client guide:
+
+```sh
+python3 tools/build_client_kit.py --server https://cloud.example.org --output client-kit
+```
+
+Replace the example origin with your own HTTPS address, then open
+`client-kit/Start.html`. The generator refuses to overwrite an existing directory,
+does not install clients or store credentials, and supports root-origin deployments.
+Keep personalized output private; the default output directory is ignored by Git.
+This is a portable link kit, not an automatic account configurator.
 
 The helper uses only the Python standard library. Run the behavior tests locally:
 

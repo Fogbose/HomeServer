@@ -30,6 +30,12 @@ jobs:
         run: python3 tools/homeserver.py init
       - name: Validate Compose
         run: docker compose config -q
+      - name: Validate optional Memories configuration
+        run: docker compose -f compose.yaml -f compose.memories.yaml config -q
+      - name: Build and exercise optional media image
+        run: |
+          docker compose -f compose.yaml -f compose.memories.yaml build app
+          python3 tests/media_smoke.py
       - name: Start disposable stack
         run: docker compose up -d --wait --wait-timeout 600
       - name: Configure background jobs and inspect readiness

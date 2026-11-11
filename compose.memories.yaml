@@ -1,0 +1,10 @@
+# Optional overlay: always pass both files, including for later updates.
+services:
+  app:
+    image: homeserver-nextcloud-media:34.0.5
+    build:
+      context: ./applications/media
+    pull_policy: never
+  cron:
+    image: homeserver-nextcloud-media:34.0.5
+    pull_policy: never

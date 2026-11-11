@@ -1,0 +1,13 @@
+[
+  {"id":"cookbook","name":"Cookbook","purpose":"Recipes","observed_version":"0.11.12"},
+  {"id":"cospend","name":"Cospend","purpose":"Shared expenses","observed_version":"4.3.0"},
+  {"id":"calendar","name":"Calendar","purpose":"Calendars","observed_version":"6.6.5"},
+  {"id":"contacts","name":"Contacts","purpose":"Address books","observed_version":"8.9.5"},
+  {"id":"tasks","name":"Tasks","purpose":"Daily and recurring tasks","observed_version":"0.18.1"},
+  {"id":"notes","name":"Notes","purpose":"Personal notes","observed_version":"6.1.0"},
+  {"id":"passwords","name":"Passwords","purpose":"Password manager","observed_version":"2026.11.20"},
+  {"id":"memories","name":"Memories","purpose":"Photo and video timeline","observed_version":"11.1.2"},
+  {"id":"tables","name":"Tables","purpose":"Structured lists","observed_version":"2.4.0"},
+  {"id":"forms","name":"Forms","purpose":"Questionnaires","observed_version":"5.4.1"},
+  {"id":"deck","name":"Deck","purpose":"Project boards","observed_version":"1.18.6"}
+]
