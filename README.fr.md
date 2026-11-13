@@ -11,8 +11,9 @@ le démarrage rapide et les liens vers tous les guides.
 - Initialisation des secrets sans écrasement, diagnostic en lecture seule et
   envoi Wake-on-LAN local avec aperçu par défaut.
 - Documentation de l'accès privé, des sauvegardes, de la reprise et de l'énergie.
-- Parcours facultatif pour onze applications App Store, image Memories avec
-  outils vidéo persistants et kit clients Windows/Android/iOS personnalisable.
+- Image Memories avec outils vidéo persistants et architecture Talk modulaire.
+- Partie logicielle séparée : [HomeServer-Software](https://github.com/Fogbose/HomeServer-Software),
+  Maison, douze apps et clients Windows/Android/iOS/Linux.
 
 Le projet est un **starter communautaire précoce**, pas un installateur complet.
 Il ne partitionne aucun disque, ne configure pas le BIOS/pare-feu/SSH, n'installe
@@ -47,22 +48,11 @@ de votre matériel. Voir la [portée des validations](docs/validation.md).
 
 ## Applications et clients
 
-La [sélection App Store](docs/applications.md) couvre Cookbook, Cospend,
-Calendar, Contacts, Tasks, Notes, Passwords, Memories, Tables, Forms et Deck.
-Ce sont des extensions de Nextcloud ; aucun développement Foyer n'est requis.
-Consulter [Memories](docs/memories.md) pour FFmpeg/ExifTool persistants et le
-[guide clients](docs/clients.md) pour Windows, Android et iOS. Ces guides sont
-en anglais pour rester cohérents avec la documentation principale.
-
-Générer un portail local sans identifiants (Python, Windows ou Linux) :
-
-```sh
-python tools/build_client_kit.py --server https://cloud.example.org --output client-kit
-```
-
-Remplacer l'adresse d'exemple puis ouvrir `client-kit/Start.html`. Le dossier doit
-être neuf ; aucun logiciel n'est installé et aucun compte n'est configuré par
-ce générateur. Garder le résultat personnalisé privé.
+Maison, le catalogue App Store (Talk inclus), le générateur de kit et le guide
+clients sont maintenant dans [HomeServer-Software](https://github.com/Fogbose/HomeServer-Software).
+L'infrastructure reste utilisable sans ces modules. Voir les [frontières](docs/modules.md),
+[Memories](docs/memories.md), [Talk](docs/talk.md) et la
+[fiche de maintenance simple](docs/maintenance.fr.md).
 
 ## Contribuer
 

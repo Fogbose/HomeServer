@@ -1,5 +1,19 @@
 # Validation coverage
 
+## Modular extraction — 2026-11-13
+
+Client-kit tests now belong to HomeServer-Software; older results below describe
+the previous layout. Core behavior tests and Compose checks remain in this repo.
+Talk documentation is architecture guidance, not a generalized installer tested
+by core CI. No live deployment is modified to validate this split.
+
+Local pre-publication checks passed on 2026-11-13: 11 Python behavior tests,
+48 local Markdown links in the exact staged export, and base/media Compose
+configuration rendering. Gitleaks 8.30.1 found no leaks in the public export.
+CI still performs the Docker startup/media/WebDAV/persistence checks; consult
+the run for the published commit rather than assuming the previous result applies.
+
+
 ## App Store and client additions — 2026-11-11
 
 - Windows Python: 13 behavior tests passed, including HTTPS-origin rejection,

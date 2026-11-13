@@ -26,8 +26,9 @@ Backup recovery, private HTTPS and hardware wake-up still need deployment-specif
   or Nextcloud is in maintenance.
 - A local Wake-on-LAN sender with preview by default and explicit source/subnet.
 - Guides for private HTTPS, backups, isolated recovery, updates and safe power management.
-- An optional eleven-app App Store selection, a persistent Memories media image
-  and a credential-free client portal generator for Windows, Android and iOS.
+- An optional persistent Memories media image and modular Talk architecture.
+- A separate [HomeServer-Software](https://github.com/Fogbose/HomeServer-Software)
+  repository for Maison, twelve App Store selections and four-platform client guides.
 
 No telemetry, cloud account provisioning, automatic image updates, disk cleanup or
 automatic shutdown is added. Nextcloud extensions are not automatically installed.
@@ -120,17 +121,10 @@ share one physical host: this is **not high availability**. See
 
 ## Development and contribution
 
-Generate a small offline portal with links to all eleven apps and a client guide:
-
-```sh
-python3 tools/build_client_kit.py --server https://cloud.example.org --output client-kit
-```
-
-Replace the example origin with your own HTTPS address, then open
-`client-kit/Start.html`. The generator refuses to overwrite an existing directory,
-does not install clients or store credentials, and supports root-origin deployments.
-Keep personalized output private; the default output directory is ignored by Git.
-This is a portable link kit, not an automatic account configurator.
+Software and client-kit development moved to
+[HomeServer-Software](https://github.com/Fogbose/HomeServer-Software).
+Read [module boundaries](docs/modules.md), [Talk architecture](docs/talk.md) and
+the [simple maintenance checklist (French)](docs/maintenance.fr.md).
 
 The helper uses only the Python standard library. Run the behavior tests locally:
 

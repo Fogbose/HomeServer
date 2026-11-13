@@ -56,3 +56,8 @@ and starts only after app is healthy. Configure `background:cron` explicitly.
 Its process being running does not prove the last job succeeded. Check the
 Nextcloud administration page and application logs after at least one cron cycle.
 There is no automatic power-off policy or backup scheduler in this baseline.
+
+## Optional modules
+
+See [repository boundaries and interfaces](modules.md) and [Talk services](talk.md).
+The core stack does not automatically install software or provision TURN/HPB.
