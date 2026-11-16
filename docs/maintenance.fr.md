@@ -10,6 +10,8 @@ Cette fiche est générique. Le starter ne déploie pas les automatismes propres
 | Chaque mois | Préparer les mises à jour OS, images et apps : compatibilité, sauvegarde cohérente, test, fenêtre d'arrêt, vérification après mise à jour | Détection oui ; mises à jour/migrations à superviser |
 | Chaque mois si HPB concerné | Redémarrer uniquement HPB hors appel pour renouveler ses identifiants TURN temporaires ; toujours avant leur expiration | Possible avec détection fiable des appels ; pas de redémarrage aveugle |
 | Avant expiration TLS | Renouveler le certificat, vérifier clé/certificat et recharger le proxy | Oui ; contrôler le timer et l'expiration réelle |
+| Si supervision installée | Contrôler fraîcheur des mesures, unités en échec et accès de secours SSH ; un état réseau absent reste inconnu | Collecte et alertes automatisables ; voir le module dédié |
+| Si connexion commune installée | Vérifier MFA, renouvellement TLS, déconnexion et récupération ; fermer Cockpit/SSH séparément | Renouvellement et contrôles automatisables ; élévation système distincte |
 | Tous les trois mois et après changement important | Restaurer une sauvegarde dans un environnement isolé, vérifier fichiers et base, puis tester avec un compte ordinaire | Procédure automatisable ; validation de récupération à conserver |
 | À chaque départ/perte d'appareil | Révoquer sessions et accès VPN, revoir partages et récupération Passwords | Action humaine, assistable |
 
@@ -20,3 +22,9 @@ revenir simplement à une ancienne image après migration de base.
 Voir [exploitation](operations.md), [sauvegarde/reprise](backup-restore.md),
 [Talk](talk.md) et [modules](modules.md). Les mises à jour restent nécessaires
 même si une version d'image est épinglée.
+
+L'architecture et les outils de supervision sont maintenus dans
+[HomeServer-Monitoring](https://github.com/Fogbose/HomeServer-Monitoring).
+Ils restent optionnels et le SSO est expérimental. Après une préparation d'arrêt
+abandonnée, utiliser une reprise vérifiée ; ne pas laisser une maintenance
+persistante sans procédure de récupération. Aucune extinction automatique ajoutée.

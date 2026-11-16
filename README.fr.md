@@ -1,5 +1,11 @@
 # HomeServer
 
+La supervision dispose de son propre projet :
+[HomeServer-Monitoring](https://github.com/Fogbose/HomeServer-Monitoring).
+L'infrastructure Nextcloud reste ici et les applications dans
+[HomeServer-Software](https://github.com/Fogbose/HomeServer-Software).
+Voir [les frontières des modules](docs/modules.md) et [la supervision optionnelle](docs/monitoring.md).
+
 Un point de départ **privé par défaut** pour héberger Nextcloud sur un serveur
 domestique Debian avec Docker Compose. Le [README principal](README.md) contient
 le démarrage rapide et les liens vers tous les guides.

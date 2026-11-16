@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Separated optional monitoring architecture, console and SSO laboratory into
+  HomeServer-Monitoring; base Compose and deployment behavior remain unchanged.
+
 - Generalized a private Debian/Nextcloud deployment into a community starter.
 - Added persistent Compose services, generated secret initialization, scoped
   diagnostics, preview-first local WOL and behavior tests.

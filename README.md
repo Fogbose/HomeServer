@@ -33,6 +33,11 @@ Backup recovery, private HTTPS and hardware wake-up still need deployment-specif
 No telemetry, cloud account provisioning, automatic image updates, disk cleanup or
 automatic shutdown is added. Nextcloud extensions are not automatically installed.
 
+The optional control plane now lives in
+[HomeServer-Monitoring](https://github.com/Fogbose/HomeServer-Monitoring): console,
+probes, monitoring architecture and experimental SSO lab. See
+[module boundaries](docs/modules.md) and [monitoring integration](docs/monitoring.md).
+
 ## Requirements
 
 Deployment target: a **64-bit Linux host**, initially Debian 13, with Docker Engine,

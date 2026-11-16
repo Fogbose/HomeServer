@@ -1,17 +1,25 @@
 # Module boundaries
 
-Two independent MIT repositories replace the former mixed layout:
+Three independent MIT repositories separate host infrastructure, applications
+and the monitoring control plane:
 
 | Layer | Repository | Responsibility |
 | --- | --- | --- |
 | Infrastructure | [HomeServer](https://github.com/Fogbose/HomeServer) | Docker, persistence, private ingress, backups, media binaries and operational architecture |
 | Software | [HomeServer-Software](https://github.com/Fogbose/HomeServer-Software) | Maison launcher, App Store catalogue, client-kit generator and client guides |
+| Monitoring | [HomeServer-Monitoring](https://github.com/Fogbose/HomeServer-Monitoring) | Monitoring architecture, loopback console, telemetry, maintenance guards and isolated SSO lab |
 | Upstream apps | Nextcloud App Store | Independently licensed/signed software; installed through Nextcloud, not vendored here |
 
 The base remains usable without Maison, Talk, Memories or any selected app.
 Maison can also run on a compatible Nextcloud not deployed with this starter.
 Repositories have independent histories and validation; moving software does not
 move or delete any deployed application or user data.
+
+Monitoring is optional. This starter still launches four services and does not
+install agents, Cockpit, an IdP, new VPN identities or root power helpers. The
+monitoring repository owns those reference architectures and their validation
+limits; its experimental SSO work is not a production-ready installation claim.
+See [the monitoring boundary](monitoring.md).
 
 ## Interface contract
 
